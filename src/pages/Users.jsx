@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../redux/hooks';
 import api from '../api';
 import { SkeletonTable } from '../components/Skeleton';
 

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import toast from 'react-hot-toast';
 import api from '../api';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../redux/hooks';
 import { SkeletonTable } from '../components/Skeleton';
 
 const EMPTY = { product_id: '', name: '', category: 'food', price: '', current_stock: '', reorder_point: '' };

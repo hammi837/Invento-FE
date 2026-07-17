@@ -4,7 +4,7 @@ import {
   Tooltip, ResponsiveContainer, BarChart, Bar, Cell,
 } from 'recharts';
 import api from '../api';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../redux/hooks';
 import { SkeletonCard, SkeletonTable } from '../components/Skeleton';
 
 /* ── colour tokens (match App.css semantic system) ── */
