@@ -1,13 +1,156 @@
-*, *::before, *::after {
-  box-sizing: border-box;
-}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-body {
-  margin: 0;
+html, body, #root {
+  height: 100%;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-#root {
-  width: 100%;
+/* ═══════════════════════════════════════════
+   THEME VARIABLES
+   Applied via [data-theme="..."] on <html>
+═══════════════════════════════════════════ */
+
+/* ── Light theme (default) ── */
+:root,
+[data-theme="light"] {
+  --bg-base:      #f1f5f9;
+  --bg-sidebar:   #ffffff;
+  --bg-topbar:    #ffffff;
+  --bg-surface:   #ffffff;
+  --bg-raised:    #f8fafc;
+  --bg-input:     #f1f5f9;
+  --bg-hover:     #f1f5f9;
+
+  --border:       #e2e8f0;
+  --border-hi:    #cbd5e1;
+  --border-focus: #6366f1;
+
+  --text-hi:      #0f172a;
+  --text-mid:     #475569;
+  --text-low:     #94a3b8;
+  --text-muted:   #cbd5e1;
+
+  --accent:       #6366f1;
+  --accent-hi:    #818cf8;
+  --accent-bg:    rgba(99,102,241,0.08);
+  --accent-border:rgba(99,102,241,0.2);
+
+  --danger:       #ef4444;
+  --danger-bg:    rgba(239,68,68,0.08);
+  --danger-border:rgba(239,68,68,0.2);
+  --danger-text:  #dc2626;
+
+  --amber:        #f59e0b;
+  --amber-bg:     rgba(245,158,11,0.08);
+  --amber-text:   #d97706;
+
+  --green:        #22c55e;
+  --green-bg:     rgba(34,197,94,0.08);
+  --green-text:   #16a34a;
+
+  --shadow:       0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md:    0 4px 12px rgba(0,0,0,0.08);
+  --shadow-lg:    0 10px 30px rgba(0,0,0,0.1);
+
+  --scrollbar-thumb: #cbd5e1;
 }
+
+/* ── Dark theme ── */
+[data-theme="dark"] {
+  --bg-base:      #0b0d12;
+  --bg-sidebar:   #0d1017;
+  --bg-topbar:    #0d1017;
+  --bg-surface:   #14171f;
+  --bg-raised:    #1a1e28;
+  --bg-input:     #0b0d12;
+  --bg-hover:     #1a1e28;
+
+  --border:       #1f2430;
+  --border-hi:    #2a3042;
+  --border-focus: #6366f1;
+
+  --text-hi:      #e6edf3;
+  --text-mid:     #8b949e;
+  --text-low:     #6e7681;
+  --text-muted:   #3d444d;
+
+  --accent:       #6366f1;
+  --accent-hi:    #818cf8;
+  --accent-bg:    rgba(99,102,241,0.12);
+  --accent-border:rgba(99,102,241,0.25);
+
+  --danger:       #ef4444;
+  --danger-bg:    rgba(239,68,68,0.1);
+  --danger-border:rgba(239,68,68,0.2);
+  --danger-text:  #f87171;
+
+  --amber:        #f59e0b;
+  --amber-bg:     rgba(245,158,11,0.1);
+  --amber-text:   #fbbf24;
+
+  --green:        #22c55e;
+  --green-bg:     rgba(34,197,94,0.1);
+  --green-text:   #4ade80;
+
+  --shadow:       0 1px 3px rgba(0,0,0,0.3);
+  --shadow-md:    0 4px 16px rgba(0,0,0,0.4);
+  --shadow-lg:    0 10px 40px rgba(0,0,0,0.5);
+
+  --scrollbar-thumb: #21262d;
+}
+
+/* ── Orange / Sunset theme ── */
+[data-theme="orange"] {
+  --bg-base:      #fdf6ee;
+  --bg-sidebar:   #fff8f0;
+  --bg-topbar:    #fff8f0;
+  --bg-surface:   #ffffff;
+  --bg-raised:    #fef3e8;
+  --bg-input:     #fef3e8;
+  --bg-hover:     #fef3e8;
+
+  --border:       #fde8c8;
+  --border-hi:    #fbd3a0;
+  --border-focus: #f97316;
+
+  --text-hi:      #1c1107;
+  --text-mid:     #7c4a1c;
+  --text-low:     #b8864e;
+  --text-muted:   #e5c99a;
+
+  --accent:       #f97316;
+  --accent-hi:    #fb923c;
+  --accent-bg:    rgba(249,115,22,0.08);
+  --accent-border:rgba(249,115,22,0.25);
+
+  --danger:       #ef4444;
+  --danger-bg:    rgba(239,68,68,0.08);
+  --danger-border:rgba(239,68,68,0.2);
+  --danger-text:  #dc2626;
+
+  --amber:        #f59e0b;
+  --amber-bg:     rgba(245,158,11,0.1);
+  --amber-text:   #d97706;
+
+  --green:        #22c55e;
+  --green-bg:     rgba(34,197,94,0.08);
+  --green-text:   #16a34a;
+
+  --shadow:       0 1px 3px rgba(180,80,0,0.08), 0 1px 2px rgba(180,80,0,0.04);
+  --shadow-md:    0 4px 12px rgba(180,80,0,0.1);
+  --shadow-lg:    0 10px 30px rgba(180,80,0,0.12);
+
+  --scrollbar-thumb: #fbd3a0;
+}
+
+/* ── Base styles ── */
+body {
+  background: var(--bg-base);
+  color: var(--text-hi);
+  transition: background 0.2s, color 0.2s;
+}
+
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 3px; }
