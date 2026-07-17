@@ -1,0 +1,67 @@
+/*
+ * LAYOUT.CSS — Shell layout rules
+ * These rules control the scroll behaviour of the app.
+ * Must be imported AFTER App.css so they take priority.
+ *
+ * The scroll chain:
+ *   html/body/root  → height: 100% (set in index.css)
+ *   .app-shell      → height: 100vh, overflow: hidden  (sidebar + content side by side)
+ *   .main-content   → flex: 1, min-height: 0           (topbar + scroll area stacked)
+ *   .topbar         → flex-shrink: 0                   (stays fixed at top)
+ *   .page-area      → flex: 1, min-height: 0,
+ *                     overflow-y: auto                  (THIS is the scroll container)
+ *   .panel          → overflow: hidden                  (clean rounded cards inside)
+ */
+
+.app-shell {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--bg-base);
+}
+
+.sidebar {
+  width: 224px;
+  flex-shrink: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-section {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.main-content {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;          /* CRITICAL: without this, flex child won't shrink */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.topbar {
+  flex-shrink: 0;
+  height: 52px;
+}
+
+.page-area {
+  flex: 1;
+  min-height: 0;           /* CRITICAL: same reason */
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 22px 24px 56px; /* 56px bottom so last row is never hidden */
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Panels grow to fit their content — page-area scrolls around them */
+.panel {
+  flex-shrink: 0;          /* don't let panels collapse */
+  overflow: hidden;        /* keeps rounded corners clean */
+}
