@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../redux/hooks';
 
 export default function Navbar() {
   const { user, logout, hasRole } = useAuth();

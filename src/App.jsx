@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { Provider } from 'react-redux';
 import { Toaster } from 'react-hot-toast';
-import { AuthProvider } from './context/AuthContext';
-import { ThemeProvider } from './context/ThemeContext';
+import store from './redux/store';
+import { useAuth } from './redux/hooks';
+import { useTheme } from './redux/hooks';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import Sidebar from './components/Sidebar';
 import ThemeSwitcher from './components/ThemeSwitcher';
@@ -76,11 +78,23 @@ function AppShell() {
   );
 }
 
+function ReduxInitializer({ children }) {
+  const { checkAuth } = useAuth();
+  const { initializeTheme } = useTheme();
+
+  useEffect(() => {
+    checkAuth();
+    initializeTheme();
+  }, [checkAuth, initializeTheme]);
+
+  return <>{children}</>;
+}
+
 export default function App() {
   return (
-    <BrowserRouter>
-      <ThemeProvider>
-        <AuthProvider>
+    <Provider store={store}>
+      <BrowserRouter>
+        <ReduxInitializer>
           <Toaster
             position="top-right"
             toastOptions={{
@@ -103,8 +117,8 @@ export default function App() {
               </ProtectedRoute>
             } />
           </Routes>
-        </AuthProvider>
-      </ThemeProvider>
-    </BrowserRouter>
+        </ReduxInitializer>
+      </BrowserRouter>
+    </Provider>
   );
 }

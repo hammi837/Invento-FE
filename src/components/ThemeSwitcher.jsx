@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
-import { useTheme, THEMES } from '../context/ThemeContext';
+import { useTheme } from '../redux/hooks';
 
 export default function ThemeSwitcher() {
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme, themes } = useTheme();
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
 
@@ -15,12 +15,12 @@ export default function ThemeSwitcher() {
   return (
     <div className="theme-switcher" ref={ref}>
       <button className="theme-trigger" onClick={() => setOpen(o => !o)} title="Change theme">
-        {THEMES[theme]?.icon}
+        {themes[theme]?.icon}
       </button>
       {open && (
         <div className="theme-dropdown">
           <div className="theme-dropdown-label">Theme</div>
-          {Object.values(THEMES).map(t => (
+          {Object.values(themes).map(t => (
             <button
               key={t.key}
               className={`theme-option ${theme === t.key ? 'active' : ''}`}
